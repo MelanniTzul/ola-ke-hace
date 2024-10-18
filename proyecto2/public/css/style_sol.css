@@ -1,0 +1,124 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f7fa; /* Color de fondo más suave */
+    margin: 0;
+    padding: 40px; /* Padding más amplio para el body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que el contenido esté centrado verticalmente */
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 30px; /* Padding más amplio */
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px; /* Mayor ancho para el diseño horizontal */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Sombra más prominente */
+    border: 1px solid #e1e5ea; /* Borde sutil para el contenedor */
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 24px; /* Margen inferior mayor */
+    font-weight: 700;
+    color: #333;
+    font-size: 24px; /* Tamaño de fuente más grande */
+    letter-spacing: 0.5px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Margen inferior mayor */
+}
+
+.form-group label {
+    margin-bottom: 6px; /* Margen inferior menor */
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px; /* Padding más amplio */
+    border: 1px solid #d0d7dd; /* Borde más suave */
+    border-radius: 6px; /* Radio de borde más pequeño */
+    font-size: 15px; /* Tamaño de fuente más grande */
+    background-color: #f7f8fa; /* Fondo de campo de entrada más claro */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="date"] {
+    padding: 10px; /* Padding ajustado para el campo de fecha */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.2); /* Sombra en el enfoque */
+}
+
+/* Estilos para el diseño horizontal */
+.form-row {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en una nueva fila si no caben en una sola línea */
+    gap: 20px; /* Espacio entre los elementos de la fila */
+    margin-bottom: 20px; /* Margen inferior mayor */
+}
+
+.form-row > div {
+    flex: 1; /* Hace que los elementos dentro de .form-row ocupen el mismo espacio */
+    min-width: 200px; /* Asegura que los elementos no sean demasiado pequeños */
+}
+
+.form-row label {
+    margin-bottom: 6px; /* Margen inferior menor */
+}
+
+/* Botón principal */
+.btn {
+    background-color: #4CAF50; /* Verde más destacado */
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049; /* Verde un poco más oscuro */
+    transform: translateY(-2px); /* Sutil efecto de elevación en hover */
+}
+
+/* Grupo de botones para regresar y enviar */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-regresar {
+    background-color: #9E9E9E; /* Gris claro */
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 48%;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-regresar:hover {
+    background-color: #757575; /* Gris oscuro al hacer hover */
+    transform: translateY(-2px); /* Sutil efecto de elevación en hover */
+}

@@ -1,0 +1,79 @@
+#reservations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 550px;
+    height: 460px;
+    margin: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.card p {
+    margin: 5px 0;
+    color: #555;
+}
+button {
+    background-color: #6c757d; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #5a6268; 
+}
+
+button:focus {
+    outline: none;
+}
+
+.menu-button {
+    position: relative; /* Necesario para posicionar el menú desplegable */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    display: inline-block; /* Permite que el botón y el menú se alineen correctamente */
+}
+
+.dropdown {
+    display: none; /* Oculta el menú por defecto */
+    position: absolute; /* Posiciona el menú respecto al botón */
+    background-color: white; /* Color de fondo */
+    border: 1px solid #ccc; /* Bordes */
+    z-index: 1; /* Asegura que el menú esté por encima de otros elementos */
+    padding: 10px; /* Espaciado interno */
+    top: 100%; /* Mueve el menú debajo del botón */
+    left: 0; /* Alinea el menú a la izquierda del botón */
+}
+
+.dropdown button {
+    display: block; /* Cada botón ocupa una línea */
+    margin: 5px 0; /* Margen entre botones */
+    width: 100%; /* Ocupar el ancho completo del menú */
+}

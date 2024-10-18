@@ -1,0 +1,296 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+
+
+.navbar.collapsed {
+    width: 80px; /* Ancho cuando está colapsada */
+}
+
+.navbar .toggle-btn {
+    display: none;
+}
+
+.logo {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    width: 100%; /* Asegura que los enlaces ocupen todo el ancho de la barra */
+}
+
+.nav-links li {
+    display: block;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s;
+}
+
+/* .nav-links a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+} */
+
+.main-content {
+    margin-left:  200px; /* Espacio para la barra de navegación */
+    margin-right: 200px;
+    /* padding: 30px; */
+    flex: 1;
+    display: flex; /* Flexbox para centrar el contenido */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+}
+
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 22px 22px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        width: 100%; /* Barra de navegación ocupa todo el ancho en pantallas pequeñas */
+        height: auto;
+        position: relative; /* No fija en el lado izquierdo en pantallas pequeñas */
+        display: flex;
+        flex-direction: row;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        display: flex;
+    }
+
+    .navbar .toggle-btn {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+    }
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 15px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.nav-links i {
+    font-size: 25px; /* Ajusta el tamaño del icono según tus necesidades */
+    margin-right: 20px;
+}
+
+.nav-links .nav-text {
+    display: inline;
+}
+
+.navbar.collapsed .nav-text {
+    display: none;
+}
+
+.navbar.collapsed i {
+    margin-right: 20;
+}
+
+.custom-img {
+    padding-top: 20px;
+    width: 500px;
+    height: auto;
+    justify-content: center;
+}
+
+.ti{
+    justify-content: left;
+    margin-left: auto; /* Empuja el título hacia el extremo derecho */
+    text-align: left;  /* Asegura que el texto dentro del título también esté alineado a la derecha */
+}
+
+/* Estilo para la tabla */
+#buildingTable {
+    width: 100%;
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+    margin: 20px 0; /* Espaciado superior e inferior */
+    font-family: Arial, sans-serif; /* Fuente */
+}
+
+/* Estilo para las celdas de la tabla */
+#buildingTable th, #buildingTable td {
+    border: 1px solid #ddd; /* Color de borde */
+    padding: 12px; /* Espaciado interno */
+    text-align: left; /* Alineación del texto */
+}
+
+/* Estilo para el encabezado de la tabla */
+#buildingTable th {
+    background-color: #f4f4f4; /* Color de fondo */
+    color: #333; /* Color del texto */
+    font-weight: bold; /* Negrita */
+}
+
+/* Estilo para las filas de la tabla */
+#buildingTable tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo de filas pares */
+}
+
+#buildingTable tr:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
+}
+
+/* Estilo para los botones de acción */
+#buildingTable button {
+    background-color: #4CAF50; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 8px 12px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Mostrar en línea */
+    font-size: 14px; /* Tamaño del texto */
+    margin: 2px; /* Espaciado alrededor del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+#buildingTable button:hover {
+    background-color: #45a049; /* Color de fondo al pasar el ratón */
+}
+
+/* Estilo para el formulario */
+#buildingForm {
+    margin: 20px 0; /* Espaciado superior e inferior */
+    font-family: Arial, sans-serif; /* Fuente */
+}
+
+#buildingForm label {
+    display: block; /* Alineación vertical */
+    margin: 10px 0 5px; /* Espaciado alrededor de las etiquetas */
+}
+
+#buildingForm input[type="text"] {
+    width: calc(100% - 22px); /* Ancho del campo de texto */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Espaciado inferior */
+    border: 1px solid #ccc; /* Color de borde */
+    border-radius: 4px; /* Bordes redondeados */
+    box-sizing: border-box; /* Incluye el padding y border en el ancho total */
+}
+
+#buildingForm button {
+    background-color: #007bff; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Mostrar en línea */
+    font-size: 16px; /* Tamaño del texto */
+    margin-top: 10px; /* Espaciado superior */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+#buildingForm button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el ratón */
+}
+
+#buildingDetails {
+    text-align: center; /* Centra el texto y los elementos dentro del contenedor */
+    margin: 0 auto; /* Centra el contenedor dentro de su contenedor padre */
+    padding: 20px; /* Espaciado interno para que el contenido no esté pegado a los bordes */
+    max-width: 800px; /* Ancho máximo del contenedor para evitar que se estire demasiado en pantallas grandes */
+}
+
+#buildingDetails p {
+    margin: 10px 0; /* Espaciado vertical entre párrafos */
+}
+
+#buildingDetails .texto {
+    text-align: justify; /* Alinea el texto de la descripción de manera justificada para una mejor lectura */
+}
+
+#buildingDetails button {
+    background-color: #007bff; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño del texto */
+    margin: 20px 0; /* Espaciado vertical alrededor del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 4px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+#buildingDetails button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el ratón */
+}
+
+
+.top-bar {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos en los extremos */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 10px;
+    background-color: #f1f1f1; /* Cambia si lo necesitas */
+}
+
+.toggle-btn {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.login-btn {
+    margin-left: auto; /* Empuja el botón hacia la derecha */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-btn:hover {
+    background-color: #45a049;
+}
+
+.title {
+    padding-bottom: 10px; /* Añade espacio abajo del título */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    flex: 1; /* Expande para ocupar el espacio restante */
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+

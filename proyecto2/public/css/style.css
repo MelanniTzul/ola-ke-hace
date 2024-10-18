@@ -1,0 +1,12 @@
+.estilo{
+    background-color: aquamarine;
+    text-align: center;
+}
+
+.s {
+    /* Puedes ajustar estilos según tus preferencias */
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    text-decoration: none; /* Elimina la decoración de enlace */
+}
