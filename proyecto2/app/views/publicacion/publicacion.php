@@ -35,7 +35,7 @@
                         return;
                     }
 
-                    fetch('../../controllers/reportarPublicacionController.php', {
+                    fetch('../../../app/controllers/reportarPublicacionController.php', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
