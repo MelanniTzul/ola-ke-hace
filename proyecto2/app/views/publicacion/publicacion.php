@@ -19,9 +19,8 @@
             <!-- Botones de acción -->
             <div style="padding: 10px;">
                 <button class="btn btn-primary" onclick="editar(<?php echo htmlspecialchars($res['id']); ?>)">Editar</button>
-                <button class="btn btn-primary" onclick="eliminar(<?php echo htmlspecialchars($res['id']); ?>)">Eliminar</button>
-                <button class="btn btn-primary" onclick="reservar()">Participar</button>
-                <!-- <button class="btn btn-primary" onclick="reservar(<?php echo htmlspecialchars($res['id']); ?>)">Reportar</button> -->
+                <button class="btn btn-primary" onclick="eliminar(<?php echo htmlspecialchars($res['id_publicacion']); ?>)">Eliminar</button>
+                <button class="btn btn-primary" onclick="reservar(<?php echo htmlspecialchars($res['id']); ?>)">Reportar</button>
                 <button class="btn btn-primary" onclick="reportar(<?php echo htmlspecialchars($res['id_publicacion']); ?>)">Reportar</button>
 
             </div>
@@ -60,7 +59,46 @@
                             alert('Error al enviar el reporte. Por favor intenta nuevamente.');
                         });
                 }
+
+
+                function eliminar(idPublicacion) {
+                    if (confirm("¿Estás seguro de que deseas eliminar esta publicación?")) {
+                        fetch('/app/controllers/publicacionControllers.php', { 
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    action: 'deletePublicacion',
+                                    id: idPublicacion
+                                })
+                            })
+                            .then(response => response.text())
+                            .then(data => {
+                                console.log("Respuesta del servidor:", data); 
+                                try {
+                                    const jsonData = JSON.parse(data);
+                                    if (jsonData.success) {
+                                        alert(jsonData.message);
+                                        location.reload();
+                                    } else {
+                                        alert("Error: " + jsonData.message);
+                                    }
+                                } catch (error) {
+                                    console.error("Error al parsear JSON:", error);
+                                    alert("Error en el formato de la respuesta del servidor.");
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error en la solicitud:', error);
+                                alert('Error al intentar eliminar la publicación.');
+                            });
+                    }
+                }
             </script>
+
+
         </div>
     <?php endforeach; ?>
 </div>
