@@ -1,4 +1,3 @@
-//*IMPORTACIONES
 <?php
 require_once __DIR__ . '/../../controllers/userController.php';
 require_once __DIR__ . '/../../controllers/publicacionControllers.php';
@@ -55,81 +54,8 @@ $reserController = new ReservationCOntroller();
                     <i class="bi bi-plus"></i>
                 </button>
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"><strong>Agregar Publicación</strong></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form [formGroup]="publicationForm" (ngSubmit)="onSubmit()">
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="nombre" class="form-label">Nombre de la Publicación</label>
-                                        <input type="text" formControlName="nombre_publicacion" class="form-control" id="nombre" placeholder="Cumpleaños">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="estado" class="form-label">Estado</label>
-                                        <select formControlName="estado" class="form-select" id="estado">
-                                            <option [ngValue]="true">Activo</option>
-                                            <option [ngValue]="false">Inactivo</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="descripcion" class="form-label">Descripción</label>
-                                        <textarea formControlName="descripcion" class="form-control" id="descripcion" rows="3" placeholder="Descripción del evento"></textarea>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="fecha" class="form-label">Fecha</label>
-                                        <input type="date" formControlName="fecha" class="form-control" id="fecha" placeholder="2024-10-15">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="id_categoria" class="form-label">ID Categoría</label>
-                                        <input type="number" formControlName="id_categoria" class="form-control" id="id_categoria" placeholder="2">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="ubicacion" class="form-label">Ubicación</label>
-                                        <input type="text" formControlName="ubicacion" class="form-control" id="ubicacion" placeholder="Centro de Convenciones">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="hora" class="form-label">Hora</label>
-                                        <input type="time" formControlName="hora" class="form-control" id="hora" placeholder="10:00 AM">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="id_tipo_publico" class="form-label">ID Tipo Público</label>
-                                        <input type="number" formControlName="id_tipo_publico" class="form-control" id="id_tipo_publico" placeholder="1">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="limite_personas" class="form-label">Límite de Personas</label>
-                                        <input type="number" formControlName="limite_personas" class="form-control" id="limite_personas" placeholder="150">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="imagen" class="form-label">URL de la Imagen</label>
-                                        <input type="text" formControlName="imagen" class="form-control" id="imagen" placeholder="https://entercommla.com/hipegot/2024/07/PORTADA-1-1.png">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" (click)="onSubmit()">Guardar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Formulario publi-->
+            <?php require __DIR__ .'/../../views/publicacion/addpublicacion.php' ?>
 
             <h1 class="title">Publicaciones o Eventos</h1>
 
