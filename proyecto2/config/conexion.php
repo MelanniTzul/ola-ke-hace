@@ -6,14 +6,10 @@ $password = "admin";
 $base_datos = "ola_ke_hace";
 
 //*CONEXIÓN
-try {
     $conn = new mysqli($servidor, $usuario, $password, $base_datos);
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+    if (!$conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }else{
+        error_log("Connected successfully") ;
     }
-    error_log("Connected successfully") ;
-} catch (\Throwable $th) {
-    error_log('Error: '.$th->getMessage());
-    
-}
 ?>

@@ -20,7 +20,6 @@
             <div style="padding: 10px;">
                 <button class="btn btn-primary" onclick="editar(<?php echo htmlspecialchars($res['id']); ?>)">Editar</button>
                 <button class="btn btn-primary" onclick="eliminar(<?php echo htmlspecialchars($res['id_publicacion']); ?>)">Eliminar</button>
-                <button class="btn btn-primary" onclick="reservar(<?php echo htmlspecialchars($res['id']); ?>)">Reportar</button>
                 <button class="btn btn-primary" onclick="reportar(<?php echo htmlspecialchars($res['id_publicacion']); ?>)">Reportar</button>
 
             </div>
