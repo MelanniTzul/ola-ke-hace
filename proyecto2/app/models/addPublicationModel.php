@@ -4,9 +4,8 @@ class AddPublicationModel
 
     private $conn;
 
-    public function __construct()
+    public function __construct($conn)
     {
-        require __DIR__ . '/../../config/conexion.php';
         $this->conn = $conn;
     }
 

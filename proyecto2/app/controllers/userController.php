@@ -1,12 +1,13 @@
 <?php
 require_once __DIR__ . '/../models/UserModel.php';
-
+require_once __DIR__ . '/../../config/conexion.php';
 
 class UserController {
     private $userModel;
 
     public function __construct() {
-        $this->userModel = new UserModel();
+        global $conn;
+        $this->userModel = new UserModel(conn: $conn);
     }
 
     public function showUsers() {
@@ -29,7 +30,7 @@ class UserController {
                     header("Location: /app/views/home/home.php");
                     exit();
                 }else{
-                    header("Location: /login.php?error=1");
+                    header("Location: /app/views/user/login.php?error=1");
                     exit();
                 }
 

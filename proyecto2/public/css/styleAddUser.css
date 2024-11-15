@@ -80,7 +80,22 @@ button:focus {
     outline: none; /* Elimina el borde de enfoque por defecto */
 }
 
+/* styleAddUser.css */
 
+.form-control {
+    height: 41px; /* Ajusta según el tamaño deseado */
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
+.form-control::placeholder {
+    font-size: 14px;
+    color: #6c757d;
+}
 
-
+.btn-block {
+    padding: 10px 0;
+    font-size: 16px;
+}

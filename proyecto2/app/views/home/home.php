@@ -10,7 +10,7 @@ $reserController = new ReservationCOntroller();
 
 <head>
     <title>Segunda Pagina</title>
-    <link rel="stylesheet" type="text/css" href="/public/css/style_home.css">
+    <link rel="stylesheet" type="text/css" href="../../../public/css/style_home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,11 +24,12 @@ $reserController = new ReservationCOntroller();
         <button class="icon-btn home-btn">
             <i class="fas fa-home"></i>
         </button>
-
+        
         <!-- Botón de Notificaciones -->
         <button class="icon-btn notification-btn">
             <i class="fas fa-bell"></i>
         </button>
+        <button onclick="redirectlogo()" class="login-btns custom-btn">Panel de Administración</button>
         <button onclick="redirect()" class="login-btn">Iniciar sesión</button>
 
 
@@ -36,6 +37,10 @@ $reserController = new ReservationCOntroller();
     <script>
         function redirect() {
             window.location.href = "/app/views/user/login.php";
+        }
+
+        function redirectlogo() {
+            window.location.href = "/app/views/user/newUser.php";
         }
     </script>
     <!-- SECCIONES -->
