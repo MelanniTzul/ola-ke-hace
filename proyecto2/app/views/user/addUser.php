@@ -1,8 +1,14 @@
 <?php
 require_once __DIR__ . '/../../controllers/paisController.php'; 
-require_once __DIR__ . '/../../controllers/rolesController.php';
+require_once __DIR__ . '/../../controllers/rolesController.php'; 
+require_once __DIR__ . '/../../controllers/userController.php'; 
 
 
+$userController = new UserController();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $userController->createUser(); 
+}
 
 $paisController = new PaisController();
 $paises = $paisController->mostrarPaises(); //* Obtener lista de países
@@ -28,7 +34,7 @@ $roles = $rolesController->mostrarRoles(); //* Obtener lista de roles
                 <p class="text-muted mb-4">Es rápido y fácil.</p>
 
                 <!-- Formulario -->
-                <form action="procesar_creacion_usuario.php" method="POST">
+                <form action="addUser.php" method="POST">
                     <!-- Nombre -->
                     <div class="form-group">
                         <input type="text" id="nombre" name="nombre" class="form-control form-control-lg" placeholder="Nombre" required>
@@ -46,7 +52,7 @@ $roles = $rolesController->mostrarRoles(); //* Obtener lista de roles
 
                     <!-- Contraseña -->
                     <div class="form-group position-relative">
-                        <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Contraseña" required>
+                        <input type="password" id="password" name="pass" class="form-control form-control-lg" placeholder="Contraseña" required>
                         <span onclick="togglePasswordVisibility('password')" class="position-absolute" style="right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer;">
                             <i class="fa fa-eye" id="togglePasswordIcon1"></i>
                         </span>
@@ -54,7 +60,7 @@ $roles = $rolesController->mostrarRoles(); //* Obtener lista de roles
 
                     <!-- Confirmar Contraseña -->
                     <div class="form-group position-relative">
-                        <input type="password" id="confirmPassword" name="password" class="form-control form-control-lg" placeholder="Confirmar contraseña" required>
+                        <input type="password" id="confirmPassword" class="form-control form-control-lg" placeholder="Confirmar contraseña" required>
                         <span onclick="togglePasswordVisibility('confirmPassword')" class="position-absolute" style="right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer;">
                             <i class="fa fa-eye" id="togglePasswordIcon2"></i>
                         </span>
@@ -62,7 +68,7 @@ $roles = $rolesController->mostrarRoles(); //* Obtener lista de roles
 
                     <!-- País -->
                     <div class="form-group">
-                        <select id="pais" name="pais" class="form-control form-control-lg" required>
+                        <select id="pais" name="id_pais" class="form-control form-control-lg" required>
                             <option disabled selected>Selecciona tu país</option>
                             <?php foreach ($paises as $pais): ?>
                                 <option value="<?= $pais['id_pais'] ?>"><?= htmlspecialchars($pais['nombre']) ?></option>
@@ -72,7 +78,7 @@ $roles = $rolesController->mostrarRoles(); //* Obtener lista de roles
 
                     <!-- Rol -->
                     <div class="form-group">
-                        <select id="rol" name="rol" class="form-control form-control-lg" required>
+                        <select id="rol" name="id_rol" class="form-control form-control-lg" required>
                             <option disabled selected>Selecciona tu rol</option>
                             <?php foreach ($roles as $rol): ?>
                                 <option value="<?= $rol['id_rol'] ?>"><?= htmlspecialchars($rol['tipo']) ?></option>

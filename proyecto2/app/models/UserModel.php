@@ -51,8 +51,21 @@ class UserModel {
         
         return false;
     }
+
+    public function insertUser($nombre, $username, $email, $password, $id_pais, $id_rol){
+        $sql = "INSERT INTO usuario (nombre, username, pass, correo, id_pais, id_rol) VALUES (?,?,?,?,?,?)";
+        $stmt = $this->conn->prepare($sql);
+        if (!$stmt) {
+            die("Error al preparar la consulta: " . $this->conn->error);
+        }
+        $stmt->bind_param("ssssii", $nombre, $username, $password, $email, $id_pais, $id_rol);
+        if (!$stmt->execute()) {
+            die("Error al ejecutar la consulta: " . $stmt->error);
+        }
+        return true;
+    }
     
-    
+
     public function __destruct() {
         $this->conn->close(); 
     }
