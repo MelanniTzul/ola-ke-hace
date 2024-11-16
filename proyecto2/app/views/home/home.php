@@ -21,10 +21,13 @@ $reserController = new ReservationCOntroller();
 <body>
     <!-- Botón de home -->
     <div class="top-bar">
-        <button class="icon-btn home-btn">
-            <i class="fas fa-home"></i>
-        </button>
-        
+        <a href="/app/views/home/home.php">
+            <button class="icon-btn home-btn">
+                <i class="fas fa-home"></i>
+            </button>
+        </a>
+
+
         <!-- Botón de Notificaciones -->
         <button class="icon-btn notification-btn">
             <i class="fas fa-bell"></i>
@@ -60,7 +63,7 @@ $reserController = new ReservationCOntroller();
                 </button>
             </div>
             <!-- Formulario publi-->
-            <?php require __DIR__ .'/../../views/publicacion/addpublicacion.php' ?>
+            <?php require __DIR__ . '/../../views/publicacion/addpublicacion.php' ?>
 
             <h1 class="title">Publicaciones o Eventos</h1>
 

@@ -32,5 +32,20 @@ class RolesModel {
 
         return $roles;
     }
+
+    public function getRolAdmin(){
+        $roles = [];
+        
+        $sql = "SELECT * FROM ola_ke_hace.rol WHERE id_rol = 1";
+        $resultado = $this->conn->query($sql);
+
+        if ($resultado->num_rows > 0) {
+            while ($fila = $resultado->fetch_assoc()) {
+                $roles[] = $fila;
+            }
+        }
+
+        return $roles;
+    }
 }
 ?>

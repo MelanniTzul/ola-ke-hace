@@ -12,6 +12,11 @@ class RolesController {
         return $this->rolesModel->getRoles();
     }
 
+
+    public function mostrarRolAdmin(){
+        return $this->rolesModel->getRolAdmin();
+    }
+
     public function mostrarRolesJSON(){
         $roles = $this->rolesModel->getRoles();
         header('Content-Type: application/json');
