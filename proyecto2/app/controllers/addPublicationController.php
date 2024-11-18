@@ -52,16 +52,16 @@ class AddPublicacionController
     //         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //             // Log para depuración
     //             file_put_contents('log.txt', 'Solicitud recibida: ' . json_encode($_POST) . PHP_EOL, FILE_APPEND);
-
+    
     //             $id_publicacion = $_POST['id_publicacion'] ?? null;
-
+    
     //             if (!$id_publicacion) {
     //                 echo json_encode(['success' => false, 'message' => 'ID de publicación no proporcionado.']);
     //                 return;
     //             }
-
+    
     //             $isDeleted = $this->addPublicationModel->deletePublication($id_publicacion);
-
+    
     //             if ($isDeleted) {
     //                 echo json_encode(['success' => true, 'message' => 'Publicación eliminada correctamente.']);
     //             } else {
@@ -74,39 +74,45 @@ class AddPublicacionController
     //         echo json_encode(['success' => false, 'message' => 'Error del servidor: ' . $e->getMessage()]);
     //     }
     public function deletePublication()
-    {
-        header('Content-Type: application/json'); // Establecer que la respuesta es JSON
-        try {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                file_put_contents('log.txt', 'Solicitud recibida: ' . json_encode($_POST) . PHP_EOL, FILE_APPEND);
+{
+    header('Content-Type: application/json'); // Establecer que la respuesta es JSON
+    try {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            file_put_contents('log.txt', 'Solicitud recibida: ' . json_encode($_POST) . PHP_EOL, FILE_APPEND);
 
-                $id_publicacion = $_POST['id_publicacion'] ?? null;
+            $id_publicacion = $_POST['id_publicacion'] ?? null;
 
-                if (!$id_publicacion) {
-                    echo json_encode(['success' => false, 'message' => 'ID de publicación no proporcionado.']);
-                    return;
-                }
-
-                $isDeleted = $this->addPublicationModel->deletePublication($id_publicacion);
-
-                if ($isDeleted) {
-                    echo json_encode(['success' => true, 'message' => 'Publicación eliminada correctamente.']);
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'Error al eliminar la publicación.']);
-                }
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Método no permitido.']);
+            if (!$id_publicacion) {
+                echo json_encode(['success' => false, 'message' => 'ID de publicación no proporcionado.']);
+                return;
             }
-        } catch (Exception $e) {
-            echo json_encode(['success' => false, 'message' => 'Error del servidor: ' . $e->getMessage()]);
+
+            $isDeleted = $this->addPublicationModel->deletePublication($id_publicacion);
+
+            if ($isDeleted) {
+                echo json_encode(['success' => true, 'message' => 'Publicación eliminada correctamente.']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Error al eliminar la publicación.']);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Método no permitido.']);
         }
+    } catch (Exception $e) {
+        echo json_encode(['success' => false, 'message' => 'Error del servidor: ' . $e->getMessage()]);
     }
 
 
+    }
+    
 
-
+    
+    
     public function editPublication()
     {
         // Método para editar publicación
     }
 }
+
+
+
+
