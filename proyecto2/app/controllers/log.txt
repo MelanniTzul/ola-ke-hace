@@ -1,0 +1,9 @@
+ID recibido en el modelo: 1
+ID recibido en el modelo: 1
+Excepción: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id_publicacion' at line 1
+ID recibido en el modelo: 1
+Excepción: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id_publicacion' at line 1
+ID recibido en el modelo: 1
+Excepción: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id_publicacion' at line 1
+ID recibido en el modelo: 1
+Excepción: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':id_publicacion' at line 1

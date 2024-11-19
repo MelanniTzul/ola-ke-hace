@@ -1,10 +1,12 @@
 <?php
 require_once __DIR__ . '/../models/UserModel.php';
 require_once __DIR__ . '/../../config/conexion.php';
-
 class UserController
 {
     private $userModel;
+    private $jwtSecret = "tu_secreto_super_seguro";
+    private $jwtAlgo = "HS256";
+
 
     public function __construct()
     {
@@ -29,6 +31,7 @@ class UserController
             if ($user) {
                 session_start();
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['id'] = $user['id_usuario'];
                 $_SESSION['rol'] = $user['id_rol'];
 
                 header("Location: /app/views/home/home.php");
@@ -49,6 +52,7 @@ class UserController
             $password = $_POST['pass'] ?? null;
             $id_pais = isset($_POST['id_pais']) ? (int) $_POST['id_pais'] : null;
             $id_rol = isset($_POST['id_rol']) ? (int) $_POST['id_rol'] : null;
+            $estado = 1;
 
 
             // Debugging
@@ -59,7 +63,7 @@ class UserController
             }
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $isCreatedUser = $this->userModel->insertUser($nombre, $username, $email, $hashedPassword, $id_pais, $id_rol);
+            $isCreatedUser = $this->userModel->insertUser($nombre, $username, $email, $hashedPassword, $id_pais, $id_rol, $estado);
             if ($isCreatedUser) {
                 header("Location: /app/views/home/home.php");
             } else {

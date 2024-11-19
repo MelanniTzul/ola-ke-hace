@@ -14,7 +14,7 @@
 <body>
     <div class="form-container">
         <h2>Reportar publicacón</h2>
-        <form action="../../controllers/ingresoSoliController.php" method="POST">
+        <form action="/app/views/publicacion/reportarPublicacion.php" method="POST">
             <div class="form-row">
                 <div class="form-group">
                     <label for="nombre">Motivo:</label>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../../controllers/userController.php';
 require_once __DIR__ . '/../../controllers/publicacionControllers.php';
 
@@ -28,12 +29,21 @@ $reserController = new ReservationCOntroller();
         </a>
 
 
-        <!-- Botón de Notificaciones -->
+        
+
+        <?php if (!isset($_SESSION['rol'])): ?>
+        <button onclick="redirect()" class="login-btn">Iniciar sesión</button>
+        <?php elseif ($_SESSION['rol'] == 1): ?>
+        <button onclick="redirectlogo()" class="login-btns custom-btn">Panel de Administración</button>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['rol'])): ?>
         <button class="icon-btn notification-btn">
             <i class="fas fa-bell"></i>
         </button>
-        <button onclick="redirectlogo()" class="login-btns custom-btn">Panel de Administración</button>
-        <button onclick="redirect()" class="login-btn">Iniciar sesión</button>
+        <button onclick="logout()" class="logout-btn custom-btn">Cerrar sesión</button>
+        <?php endif; ?>
+
 
 
     </div>
@@ -44,6 +54,9 @@ $reserController = new ReservationCOntroller();
 
         function redirectlogo() {
             window.location.href = "/app/views/user/newUser.php";
+        }
+        function logout() {
+        window.location.href = "/app/views/user/logout.php"; 
         }
     </script>
     <!-- SECCIONES -->
@@ -57,13 +70,22 @@ $reserController = new ReservationCOntroller();
     <div class="main-content">
         <div id="home" class="page-content" style="display:none;">
             <!-- AGREGAR PUBLICACION -->
+            <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>
+
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="bi bi-plus"></i>
-                </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-plus"></i>
+            </button>
             </div>
+            <?php require __DIR__ . '/../../views/publicacion/addpublicacion.php'; ?>
+            <?php endif; ?>
+
             <!-- Formulario publi-->
             <?php require __DIR__ . '/../../views/publicacion/addpublicacion.php' ?>
+
+            <h1 class="title">Bienvenido <?php echo $_SESSION['username'] ?></h1>
+            <h2 class="title">Rol: <?php echo $_SESSION['rol'] == 1 ? 'Administrador' : ($_SESSION['rol'] == 2 ? 'Publicador' : 'Usuario') ?></h2>
+
 
             <h1 class="title">Publicaciones o Eventos</h1>
 

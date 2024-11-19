@@ -11,18 +11,31 @@ class publicacionModel {
     //     //*Guardar en un arreglo los departamentoss   
     public function getPublicaciones() {
         $reservation = [];
-        $sql = "SELECT id_publicacion, nombre_publicacion, estado, descripcion, fecha, id_categoria, ubicacion, hora, id_tipo_publico, limite_personas, imagen 
-                FROM ola_ke_hace.publicacion 
-                WHERE estado = 1"; 
+        $sql = "
+            SELECT p.id_publicacion, p.nombre_publicacion, p.estado, p.descripcion, p.fecha, p.id_categoria, 
+                   p.ubicacion, p.hora, p.id_tipo_publico, p.limite_personas, p.imagen, p.id_usuario
+            FROM ola_ke_hace.publicacion p
+            LEFT JOIN (
+                SELECT id_publicacion, COUNT(*) as total_reportes 
+                FROM ola_ke_hace.reporte_publicacion
+                WHERE estado = 1
+                GROUP BY id_publicacion
+            ) rp ON p.id_publicacion = rp.id_publicacion
+            WHERE p.estado = 1 
+              AND p.aprobado = 1 
+              AND (rp.total_reportes < 3 OR rp.total_reportes IS NULL); 
+        ";
+    
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $reservation[] = $row;
             }
         }
         $this->conn->close();
         return $reservation;
     }
+    
     
 
       public function deletePublicacion($id) {

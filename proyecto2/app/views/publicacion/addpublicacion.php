@@ -1,16 +1,16 @@
 <?php
 require_once __DIR__ . '/../../controllers/tipoPublicoController.php';
 require_once __DIR__ . '/../../controllers/categoriaPublicacionController.php';
-require_once __DIR__ . '/../../controllers/addPublicationController.php';
+require_once __DIR__ . '/../../controllers/publicationController.php';
 
 //* Inicialización de controladores
-$addPublicationController = new AddPublicacionController();
+$addPublicationController = new PublicationController();
 $tipoPublicoController = new TipoPublicoController();
 $tipoCategoriaController = new CategoriaPublicacionController();
 
 // Manejo de solicitudes POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $addPublicationController->addPublication();
+    $addPublicationController->addPublication($_POST);
 }
 
 //* Obtención de datos para los selects
@@ -27,6 +27,7 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
             </div>
             <div class="modal-body">
                 <form action="/app/views/publicacion/addpublicacion.php" method="POST">
+                    
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre de la Publicación</label>
                         <input 
@@ -37,6 +38,7 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                             placeholder="Cumpleaños" 
                             required>
                     </div>
+                    <input type="hidden" name="estado" value="1">
 
                     <div class="mb-3">
                         <label for="descripcion" class="form-label">Descripción</label>
@@ -71,6 +73,27 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                                 required>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fecha" class="form-label">Fecha del evento</label>
+                            <input 
+                                type="date" 
+                                name="fecha" 
+                                class="form-control" 
+                                id="fecha" 
+                                required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="hora" class="form-label">Hora del evento</label>
+                            <input 
+                                type="time" 
+                                name="hora" 
+                                class="form-control" 
+                                id="hora" 
+                                required>
+                        </div>
+                        </div>
 
                     <div class="mb-3">
                         <label for="id_tipo_publico" class="form-label">Tipo Público</label>
@@ -112,6 +135,8 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
+
+                    <input type="hidden" name="action" value="addPublication">
                 </form>
             </div>
         </div>
