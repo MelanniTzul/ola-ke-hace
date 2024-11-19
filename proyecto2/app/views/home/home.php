@@ -83,9 +83,10 @@ $reserController = new ReservationCOntroller();
             <!-- Formulario publi-->
             <?php require __DIR__ . '/../../views/publicacion/addpublicacion.php' ?>
 
+            <?php if (isset($_SESSION['rol'])): ?>
             <h1 class="title">Bienvenido <?php echo $_SESSION['username'] ?></h1>
             <h2 class="title">Rol: <?php echo $_SESSION['rol'] == 1 ? 'Administrador' : ($_SESSION['rol'] == 2 ? 'Publicador' : 'Usuario') ?></h2>
-
+            <?php endif; ?>
 
             <h1 class="title">Publicaciones o Eventos</h1>
 
