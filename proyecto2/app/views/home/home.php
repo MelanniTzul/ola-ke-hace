@@ -21,7 +21,7 @@ $reserController = new ReservationCOntroller();
 
 <body>
     <!-- Botón de home -->
-    <div class="top-bar">
+    <header>
         <a href="/app/views/home/home.php">
             <button class="icon-btn home-btn">
                 <i class="fas fa-home"></i>
@@ -32,21 +32,22 @@ $reserController = new ReservationCOntroller();
         
 
         <?php if (!isset($_SESSION['rol'])): ?>
-        <button onclick="redirect()" class="login-btn">Iniciar sesión</button>
+        <button onclick="redirect()" class="btn btn-warning">Iniciar sesión</button>
         <?php elseif ($_SESSION['rol'] == 1): ?>
-        <button onclick="redirectlogo()" class="login-btns custom-btn">Panel de Administración</button>
+        <button onclick="redirectlogo()" class="">Panel de Administración</button>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['rol'])): ?>
-        <button class="icon-btn notification-btn">
+        <button class="">
             <i class="fas fa-bell"></i>
         </button>
-        <button onclick="logout()" class="logout-btn custom-btn">Cerrar sesión</button>
+        <button onclick="" class="">Ver perfil</button>
+        <button onclick="logout()" class="">Cerrar sesión</button>
         <?php endif; ?>
 
 
 
-    </div>
+    </header>
     <script>
         function redirect() {
             window.location.href = "/app/views/user/login.php";

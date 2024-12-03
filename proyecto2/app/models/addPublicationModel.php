@@ -20,13 +20,13 @@ class AddPublicationModel
         if ($totalReportes >= 1) {
             // Si nunca tuvo publicaciones automáticas, banear
             $totalAprobadas = $this->contarPublicacionesAprobadas($id_usuario);
-            if ($totalAprobadas <= 2) {
-                $this->banearUsuario($id_usuario);
+            if ($totalAprobadas <= 2) { 
+                $this->banearUsuario($id_usuario); //baneado y sin privilegios
                 throw new Exception("El usuario ha sido baneado debido a publicaciones repetidamente reportadas.");
             }
 
             // Si tenía publicaciones automáticas, pierde el privilegio
-            $aprobado = 0;
+            $aprobado = 0; //perdio privilegios
         } else {
             // Verificar si el usuario ya tiene 2 publicaciones aprobadas
             $totalAprobadas = $this->contarPublicacionesAprobadas($id_usuario);
@@ -274,7 +274,7 @@ class AddPublicationModel
     {
         $sql = "SELECT COUNT(*) as total_aprobadas 
                 FROM ola_ke_hace.publicacion 
-                WHERE id_usuario = ? AND aprobado = 1";
+                WHERE id_usuario = ? AND aprobado = 1";//1 = publicacion aprobada por el admin
         $stmt = $this->conn->prepare($sql);
 
         if (!$stmt) {
@@ -294,8 +294,8 @@ class AddPublicationModel
         $sql = "SELECT COUNT(*) as total_reportes 
                 FROM ola_ke_hace.reporte_publicacion rp
                 INNER JOIN ola_ke_hace.publicacion p ON rp.id_publicacion = p.id_publicacion
-                WHERE p.id_usuario = ? and rp.estado = 1
-                GROUP BY p.id_publicacion";
+                WHERE p.id_usuario = ? and rp.estado = 1 
+                GROUP BY p.id_publicacion"; //rp.estado = 1 = publicacion reportada aprobada por admin
         $stmt = $this->conn->prepare($sql);
 
         if (!$stmt) {

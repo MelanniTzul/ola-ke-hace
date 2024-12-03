@@ -23,6 +23,7 @@
                     <p>Hora: <?php echo htmlspecialchars($res['hora']); ?></p>
                     <p>Ubicación: <?php echo htmlspecialchars($res['ubicacion']); ?></p>
                     <p>Descripción: <?php echo htmlspecialchars($res['descripcion']); ?></p>
+                    <strong class="bold-text">Publicador:</strong> <?php echo htmlspecialchars($res['nombre']); ?>
                 </div>
 
                 <div class="card-footer text-end">

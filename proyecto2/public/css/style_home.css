@@ -13,6 +13,21 @@ body {
     margin: 0;
 }
 
+ 
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1d1d94;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
 
 .navbar.collapsed {
     width: 80px; /* Ancho cuando está colapsada */
@@ -66,7 +81,7 @@ body {
     align-items: center; /* Centrado vertical */
 }
 
-.top-bar {
+/* .top-bar {
     background-color: #333;
     color: white;
     padding: 22px 22px;
@@ -75,7 +90,7 @@ body {
     top: 0;
     left: 0;
     z-index: 1000;
-}
+} */
 
 @media (max-width: 768px) {
     .navbar {
@@ -170,24 +185,7 @@ body {
     background-color: #f1f1f1; /* Color de fondo al pasar el ratón */
 }
 
-/* Estilo para los botones de acción */
-#buildingTable button {
-    background-color: #4CAF50; /* Color de fondo */
-    border: none; /* Sin borde */
-    color: white; /* Color del texto */
-    padding: 8px 12px; /* Espaciado interno */
-    text-align: center; /* Alineación del texto */
-    text-decoration: none; /* Sin subrayado */
-    display: inline-block; /* Mostrar en línea */
-    font-size: 14px; /* Tamaño del texto */
-    margin: 2px; /* Espaciado alrededor del botón */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    border-radius: 4px; /* Bordes redondeados */
-}
 
-#buildingTable button:hover {
-    background-color: #45a049; /* Color de fondo al pasar el ratón */
-}
 
 /* Estilo para el formulario */
 #buildingForm {
@@ -209,23 +207,9 @@ body {
     box-sizing: border-box; /* Incluye el padding y border en el ancho total */
 }
 
-#buildingForm button {
-    background-color: #007bff; /* Color de fondo */
-    border: none; /* Sin borde */
-    color: white; /* Color del texto */
-    padding: 10px 20px; /* Espaciado interno */
-    text-align: center; /* Alineación del texto */
-    text-decoration: none; /* Sin subrayado */
-    display: inline-block; /* Mostrar en línea */
-    font-size: 16px; /* Tamaño del texto */
-    margin-top: 10px; /* Espaciado superior */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    border-radius: 4px; /* Bordes redondeados */
-}
 
-#buildingForm button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el ratón */
-}
+
+
 
 #buildingDetails {
     text-align: center; /* Centra el texto y los elementos dentro del contenedor */
@@ -242,21 +226,7 @@ body {
     text-align: justify; /* Alinea el texto de la descripción de manera justificada para una mejor lectura */
 }
 
-#buildingDetails button {
-    background-color: #007bff; /* Color de fondo */
-    border: none; /* Sin borde */
-    color: white; /* Color del texto */
-    padding: 10px 20px; /* Espaciado interno */
-    font-size: 16px; /* Tamaño del texto */
-    margin: 20px 0; /* Espaciado vertical alrededor del botón */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    border-radius: 4px; /* Bordes redondeados */
-    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
-}
 
-#buildingDetails button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el ratón */
-}
 
 
 .top-bar {
@@ -267,24 +237,7 @@ body {
     background-color: #f1f1f1; /* Cambia si lo necesitas */
 }
 
-.toggle-btn {
-    cursor: pointer;
-    font-size: 24px;
-}
 
-.login-btn {
-    margin-left: auto; /* Empuja el botón hacia la derecha */
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.login-btn:hover {
-    background-color: #45a049;
-}
 
 .title {
     padding-bottom: 10px; /* Añade espacio abajo del título */
@@ -294,3 +247,33 @@ body {
     margin-bottom: 10px;
 }
 
+header button {
+    background-color: #FFFFFF; /* Fondo blanco */
+    color: #333333; /* Texto e íconos gris oscuro */
+    border: 1px solid #CCCCCC; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+header button:hover {
+    background-color: #D8E6FF; /* Azul claro al hacer hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+header button i {
+    margin-right: 5px; /* Espaciado entre ícono y texto */
+}
+
+header .icon-btn {
+    background-color: transparent; /* Fondo transparente */
+    color: #FFFFFF; /* Íconos blancos */
+    border: none;
+    font-size: 18px;
+    padding: 10px;
+}
+
+header .icon-btn:hover {
+    color: #FFD700; /* Dorado al hacer hover en íconos */
+}
