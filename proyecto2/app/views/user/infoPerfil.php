@@ -19,9 +19,9 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
 ?>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><strong>Agregar Publicación</strong></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -29,7 +29,7 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                 <form action="/app/views/publicacion/addpublicacion.php" method="POST">
                     
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Perfil</label>
+                        <label for="nombre" class="form-label">Informacion del perfil</label>
                         <input 
                             type="text" 
                             name="nombre_publicacion" 
@@ -38,7 +38,6 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                             placeholder="Cumpleaños" 
                             required>
                     </div>
-
                     <input type="hidden" name="estado" value="1">
 
                     <div class="mb-3">
@@ -47,15 +46,14 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                             name="descripcion" 
                             class="form-control" 
                             id="descripcion" 
-                            rows="4" 
+                            rows="3" 
                             placeholder="Descripción del evento" 
                             required></textarea>
                     </div>
-
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="id_categoria" class="form-label">Categoría</label>
-                            <select id="id_categoria" name="id_categoria" class="form-select" required>
+                            <select id="id_categoria" name="id_categoria" class="form-control" required>
                                 <option disabled selected>Categoría</option>
                                 <?php foreach ($categoria as $item): ?>
                                     <option value="<?= htmlspecialchars($item['id']) ?>">
@@ -64,7 +62,6 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                                 <?php endforeach; ?>
                             </select>
                         </div>
-
                         <div class="col-md-6 mb-3">
                             <label for="ubicacion" class="form-label">Ubicación</label>
                             <input 
@@ -87,7 +84,6 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                                 id="fecha" 
                                 required>
                         </div>
-
                         <div class="col-md-6 mb-3">
                             <label for="hora" class="form-label">Hora del evento</label>
                             <input 
@@ -97,11 +93,11 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                                 id="hora" 
                                 required>
                         </div>
-                    </div>
+                        </div>
 
                     <div class="mb-3">
                         <label for="id_tipo_publico" class="form-label">Tipo Público</label>
-                        <select id="id_tipo_publico" name="id_tipo_publico" class="form-select" required>
+                        <select id="id_tipo_publico" name="id_tipo_publico" class="form-control" required>
                             <option disabled selected>Tipo de Público</option>
                             <?php foreach ($tipoPublico as $publico): ?>
                                 <option value="<?= htmlspecialchars($publico['idpublico']) ?>">
@@ -123,7 +119,6 @@ $categoria = $tipoCategoriaController->mostrarCategoria();
                                 min="1" 
                                 required>
                         </div>
-
                         <div class="col-md-6 mb-3">
                             <label for="imagen" class="form-label">URL de la Imagen</label>
                             <input 

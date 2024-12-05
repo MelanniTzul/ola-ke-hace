@@ -41,7 +41,7 @@ $reserController = new ReservationCOntroller();
         <button class="">
             <i class="fas fa-bell"></i>
         </button>
-        <button onclick="" class="">Ver perfil</button>
+        <button onclick="perfil()" class="">Ver perfil</button>
         <button onclick="logout()" class="">Cerrar sesión</button>
         <?php endif; ?>
 
@@ -58,6 +58,10 @@ $reserController = new ReservationCOntroller();
         }
         function logout() {
         window.location.href = "/app/views/user/logout.php"; 
+        }
+
+        function perfil(){
+            window.location.href = "/app/views/user/infoPerfil.php"
         }
     </script>
     <!-- SECCIONES -->
