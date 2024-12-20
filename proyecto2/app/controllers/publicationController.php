@@ -34,7 +34,7 @@ class PublicationController
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
                 throw new Exception("Método no permitido.", 405);
             }
-
+            print_r(json_encode($data)) ;
             session_start();
 
             if (!isset($_SESSION['id'])) {
@@ -73,8 +73,9 @@ class PublicationController
                 header("Location: /app/views/home/home.php");
                 exit();
             } else {
-                header("Location: /app/views/home/home.php");
-                exit();
+                // header("Location: /app/views/home/home.php");
+                die("Error al crear la publicación");
+                // exit();
             }
         } catch (Exception $e) {
             http_response_code($e->getCode() ?: 500);

@@ -204,8 +204,7 @@ class UserModel
     GROUP BY 
         cbu.id_usuario
     ORDER BY 
-        conteo DESC
-    LIMIT 3;
+        conteo DESC;
 
         ";
 

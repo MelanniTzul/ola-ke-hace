@@ -100,7 +100,7 @@ class AddPublicationModel
 
             return true;
         } catch (Exception $e) {
-            $this->conn->rollback();
+            // $this->conn->rollback();
             return false;
         }
     }

@@ -31,7 +31,7 @@
                         <a class="nav-link" href="topPublicationsReport.php">Top 3 Publicaciones Con Más Reportes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="top3UsersBan.php">Top 3 Usuarios Más Baneados</a>
+                        <a class="nav-link" href="top3UsersBan.php">Usuarios Baneados</a>
                     </li>
                 </ul>
             </div>
@@ -63,7 +63,7 @@
                     ?>
 
                     <div class="container mt-4">
-                        <h2 class="text-center mb-4">Top 3 Usuarios Más Reportados</h2>
+                        <h2 class="text-center mb-4">Usuarios Baneados</h2>
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered">
                                 <thead class="table-dark">

@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="topPublicationsReport.php">Top 3 Publicaciones Con Más Reportes</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="top3UsersBan.php">Usuarios Baneados</a>
+                    </li>
                 </ul>
             </div>
         </nav>
