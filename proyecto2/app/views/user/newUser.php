@@ -4,11 +4,11 @@
     <div class="row">
         <!-- Sidebar -->
         <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-4">
-        <a href="/app/views/home/home.php">
-            <button class="icon-btn home-btn">
-                <i class="fas fa-home"></i>
-            </button>
-        </a>
+            <a href="/app/views/home/home.php">
+                <button class="icon-btn home-btn">
+                    <i class="fas fa-home"></i>
+                </button>
+            </a>
             <div class="sidebar-sticky">
 
                 <h5 class="text-center">Panel de Administración</h5>
@@ -21,6 +21,15 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="reportes.php">Reporte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../categorias/addCategoria.php">Agregar Categoría</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="topUserReport.php">Top 3 Usuarios Con Más Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="topPublicationsReport.php">Top 3 Publicaciones Con Más Reportes</a>
                     </li>
                 </ul>
             </div>

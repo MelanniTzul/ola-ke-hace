@@ -4,8 +4,6 @@ require_once __DIR__ . '/../../config/conexion.php';
 class UserController
 {
     private $userModel;
-    private $jwtSecret = "tu_secreto_super_seguro";
-    private $jwtAlgo = "HS256";
 
 
     public function __construct()
@@ -20,6 +18,12 @@ class UserController
         extract(['users' => $users]);
         include __DIR__ . '/../views/user/userView.php';
     }
+
+    public function getUsersReport()
+    {
+        return $this->userModel->getUsersReport();
+    }
+    
 
 
     public function login()
@@ -42,6 +46,26 @@ class UserController
             }
         }
     }
+
+    public function getUserProfile()
+{
+    session_start();
+
+    if (!isset($_SESSION['username'])) {
+        echo json_encode(['error' => 'Usuario no autenticado']);
+        return;
+    }
+
+    $username = $_SESSION['username'];
+    $user = $this->userModel->getUserByUsername($username);
+
+    if ($user) {
+        echo json_encode($user);
+    } else {
+        echo json_encode(['error' => 'No se pudo obtener la información del usuario']);
+    }
+}
+
 
     public function createUser()
     {

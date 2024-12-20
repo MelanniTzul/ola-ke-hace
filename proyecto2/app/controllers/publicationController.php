@@ -23,6 +23,11 @@ class PublicationController
         return $this->addPublicationModel->getPublicacionesReportadas();
     }
 
+    public function contar3PublicacionesReportadas()
+    {
+        return $this->addPublicationModel->contar3PublicacionesReportadas();
+    }
+
     public function addPublication($data)
     {
         try {
@@ -171,9 +176,11 @@ class PublicationController
         }
 
         $estado = 0;
+        session_start();
+        $id_usuario = $_SESSION['id'];
 
         try {
-            $isReported = $this->addPublicationModel->reportPublication($id_publicacion, $motivo, $estado);
+            $isReported = $this->addPublicationModel->reportPublication($id_publicacion, $motivo, $estado, $id_usuario);
 
             if ($isReported) {
                 http_response_code(200);

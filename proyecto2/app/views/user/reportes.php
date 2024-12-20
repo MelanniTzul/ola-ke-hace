@@ -21,6 +21,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../categorias/addCategoria.php">Agregar Categoría</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="topUserReport.php">Top 3 Usuarios Con Más Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="topPublicationsReport.php">Top 3 Publicaciones Con Más Reportes</a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -63,6 +72,8 @@
                                         <th>Fecha del evento</th>
                                         <th>Hora del evento</th>
                                         <th>Motivo</th>
+                                        <th>Usuario que reportó</th>
+                                        <th>Publicador</th>
                                         <th>Url de Imagen</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -70,12 +81,14 @@
                                 <tbody>
                                     <?php foreach ($publicaciones as $publicacion): ?>
                                         <tr>
-                                        <td><?php echo htmlspecialchars($publicacion['id_publicacion']); ?></td>
+                                            <td><?php echo htmlspecialchars($publicacion['id_publicacion']); ?></td>
                                             <td><?php echo htmlspecialchars($publicacion['nombre_publicacion']); ?></td>
                                             <td><?php echo htmlspecialchars($publicacion['descripcion']); ?></td>
                                             <td><?php echo htmlspecialchars($publicacion['fecha']); ?></td>
                                             <td><?php echo htmlspecialchars($publicacion['hora']); ?></td>
                                             <td><?php echo htmlspecialchars($publicacion['motivo']); ?></td>
+                                            <td><?php echo htmlspecialchars($publicacion['usuario_reporta']); ?></td>
+                                            <td><?php echo htmlspecialchars($publicacion['usuario_publica']); ?></td>
                                             <td>
                                                 <a href="<?php echo htmlspecialchars($publicacion['imagen']); ?>" target="_blank">
                                                     Ver Imagen
@@ -101,61 +114,60 @@
 
 <script>
     function aprobar(idPublicacion) {
-    if (confirm("¿Estás seguro de aprobar esta publicación?")) {
-        fetch('/app/controllers/publicationController.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                action: 'autorizarReportePublicacion',
-                id_publicacion: idPublicacion
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Publicación reportada correctamente.');
-                window.location.reload();
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al aprobar la publicación.');
-        });
+        if (confirm("¿Estás seguro de aprobar esta publicación?")) {
+            fetch('/app/controllers/publicationController.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        action: 'autorizarReportePublicacion',
+                        id_publicacion: idPublicacion
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Publicación reportada correctamente.');
+                        window.location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al aprobar la publicación.');
+                });
+        }
     }
-}
 
-function rechazar(idPublicacion) {
-    if (confirm("¿Estás seguro de rechazar esta publicación?")) {
-        fetch('/app/controllers/publicationController.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                action: 'rechazarReportePublicacion',
-                id_publicacion: idPublicacion
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Publicación no reportada.');
-                window.location.reload();
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al rechazar la publicación.');
-        });
+    function rechazar(idPublicacion) {
+        if (confirm("¿Estás seguro de rechazar esta publicación?")) {
+            fetch('/app/controllers/publicationController.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        action: 'rechazarReportePublicacion',
+                        id_publicacion: idPublicacion
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Publicación no reportada.');
+                        window.location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al rechazar la publicación.');
+                });
+        }
     }
-}
-
 </script>

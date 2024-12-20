@@ -21,6 +21,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="reportes.php">Reportes</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../categorias/addCategoria.php">Agregar Categoría</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="topUserReport.php">Top 3 Usuarios Con Más Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="topPublicationsReport.php">Top 3 Publicaciones Con Más Reportes</a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -57,6 +66,7 @@
                             <table class="table table-hover table-bordered">
                                 <thead class="table-dark">
                                     <tr>
+                                        <th>Nombre del publicador</th>
                                         <th>Id Publicación</th>
                                         <th>Nombre publicación</th>
                                         <th>Descripción</th>
@@ -72,6 +82,7 @@
                                 <tbody>
                                     <?php foreach ($publicaciones as $publicacion): ?>
                                         <tr>
+                                            <td><?php echo htmlspecialchars($publicacion['nombre_usuario']); ?></td>
                                             <td><?php echo htmlspecialchars($publicacion['id_publicacion']); ?></td>
                                             <td><?php echo htmlspecialchars($publicacion['nombre_publicacion']); ?></td>
                                             <td><?php echo htmlspecialchars($publicacion['descripcion']); ?></td>
@@ -104,61 +115,60 @@
 
 <script>
     function aprobar(idPublicacion) {
-    if (confirm("¿Estás seguro de aprobar esta publicación?")) {
-        fetch('/app/controllers/publicationController.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                action: 'aprobarPublicacion',
-                id_publicacion: idPublicacion
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Publicación aprobada correctamente.');
-                window.location.reload();
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al aprobar la publicación.');
-        });
+        if (confirm("¿Estás seguro de aprobar esta publicación?")) {
+            fetch('/app/controllers/publicationController.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        action: 'aprobarPublicacion',
+                        id_publicacion: idPublicacion
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Publicación aprobada correctamente.');
+                        window.location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al aprobar la publicación.');
+                });
+        }
     }
-}
 
-function rechazar(idPublicacion) {
-    if (confirm("¿Estás seguro de rechazar esta publicación?")) {
-        fetch('/app/controllers/publicationController.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                action: 'rechazarPublicacion',
-                id_publicacion: idPublicacion
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Publicación rechazada correctamente.');
-                window.location.reload();
-            } else {
-                alert('Error: ' + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error al rechazar la publicación.');
-        });
+    function rechazar(idPublicacion) {
+        if (confirm("¿Estás seguro de rechazar esta publicación?")) {
+            fetch('/app/controllers/publicationController.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        action: 'rechazarPublicacion',
+                        id_publicacion: idPublicacion
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Publicación rechazada correctamente.');
+                        window.location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al rechazar la publicación.');
+                });
+        }
     }
-}
-
 </script>

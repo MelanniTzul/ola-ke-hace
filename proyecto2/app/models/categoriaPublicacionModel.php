@@ -17,4 +17,10 @@ class categoriaPublicacionModel{
         }
         return $categoriaP;
     }
+
+    public function createCategoria($nombre){
+        $sql = "INSERT INTO ola_ke_hace.categoria_publicacion(nombre_categoria) VALUES('$nombre')";
+        $resultado = $this->conn->query($sql);
+        return $resultado;
+    }
 }
