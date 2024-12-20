@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <a class="nav-link" href="../user/aprobacionPublicaciones.php">Aprobar Publicaciones Pendientes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../user/reportes.php">Reporte</a>
+                            <a class="nav-link" href="../user/reportes.php">Reporte Baneo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="addCategoria.php">Agregar Categoría</a>
@@ -48,6 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../user/topPublicationsReport.php">Top 3 Publicaciones Con Más Reportes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../user/top3UsersBan.php">Top 3 Usuarios Más Baneados</a>
                         </li>
                     </ul>
                 </div>

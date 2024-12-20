@@ -23,8 +23,11 @@ class UserController
     {
         return $this->userModel->getUsersReport();
     }
-    
 
+    public function obtener3UsuariosMasBaneados(){
+        return $this->userModel->obtener3UsuariosMasBaneados();
+    }
+    
 
     public function login()
     {

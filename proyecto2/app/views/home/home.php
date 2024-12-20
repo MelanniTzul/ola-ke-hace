@@ -79,12 +79,12 @@ $categorias = $categoriaController->mostrarCategoria();
                     document.getElementById('userEmail').innerText = data.correo || 'No disponible';
                     document.getElementById('userCountry').innerText = data.nombre_pais || 'No disponible';
                     document.getElementById('userRole').innerText = data.nombre_rol || 'No disponible';
-                    const userStateElement =document.getElementById('userEstado');
-                    if(data.nombre_rol=='Publicador_de_anuncios'){
+                    const userStateElement = document.getElementById('userEstado');
+                    if (data.nombre_rol == 'Publicador_de_anuncios') {
                         userStateElement.innerText = data.estado_usuario || 'No disponible';
-                        userStateElement.parentElement.style.display = 'block';   
-                    }else{
-                        userStateElement.parentElement.style.display = 'none';   
+                        userStateElement.parentElement.style.display = 'block';
+                    } else {
+                        userStateElement.parentElement.style.display = 'none';
                     }
                     // Muestra el modal
                     const modal = new bootstrap.Modal(document.getElementById('userProfileModal'));
@@ -285,9 +285,10 @@ $categorias = $categoriaController->mostrarCategoria();
 
             <h1 class="title">Publicaciones o Eventos</h1>
 
+
             <div class="container mt-4">
                 <form id="filtroForm" method="GET" action="">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-md-4">
                             <label for="categoria" class="form-label">Filtrar por categoría:</label>
                             <select name="categoria" id="categoria" class="form-select" onchange="document.getElementById('filtroForm').submit();">
@@ -299,9 +300,23 @@ $categorias = $categoriaController->mostrarCategoria();
                                 <?php endforeach; ?>
                             </select>
                         </div>
+
+                        <?php if (isset($_SESSION['rol']) && $_SESSION['rol'] == 2): ?>
+                            <div class="col-md-4">
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" type="checkbox" id="misPublicaciones" name="misPublicaciones" value="1"
+                                        <?php echo isset($_GET['misPublicaciones']) && $_GET['misPublicaciones'] == '1' ? 'checked' : ''; ?>
+                                        onchange="document.getElementById('filtroForm').submit();">
+                                    <label class="form-check-label" for="misPublicaciones">
+                                        Ver mis publicaciones
+                                    </label>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </form>
             </div>
+
 
 
             <?php

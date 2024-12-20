@@ -10,11 +10,13 @@ class ReservationCOntroller
 
     //*VISUALIZAR LA VISTA
     public function showPublicacion($categoriaId = null)
-    {
-        $reserva = $this->publicacionModel->getPublicaciones($categoriaId);
-        extract(['reserva' => $reserva]);
-        include __DIR__ . '/../views/publicacion/publicacion.php';
-    }
+{
+    $misPublicaciones = isset($_GET['misPublicaciones']) && $_GET['misPublicaciones'] == '1';
+    $reserva = $this->publicacionModel->getPublicaciones($categoriaId, $misPublicaciones);
+    extract(['reserva' => $reserva]);
+    include __DIR__ . '/../views/publicacion/publicacion.php';
+}
+
 
 
 

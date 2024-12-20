@@ -19,7 +19,7 @@
                         <a class="nav-link" href="aprobacionPublicaciones.php">Aprobar Publicaciones Pendientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reportes.php">Reportes</a>
+                        <a class="nav-link" href="reportes.php">Reportes Baneo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../categorias/addCategoria.php">Agregar Categoría</a>
@@ -29,6 +29,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="topPublicationsReport.php">Top 3 Publicaciones Con Más Reportes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="top3UsersBan.php">Top 3 Usuarios Más Baneados</a>
                     </li>
                 </ul>
             </div>

@@ -319,7 +319,7 @@ class AddPublicationModel
                 p.imagen, 
                 p.id_usuario, 
                 p.aprobado,
-                u.nombre AS nombre_usuario
+                u.username AS nombre_usuario
             FROM 
                 ola_ke_hace.publicacion p
             JOIN 
@@ -547,6 +547,11 @@ class AddPublicationModel
                 file_put_contents('log.txt', "Error al ejecutar la consulta: " . $stmt->error . PHP_EOL, FILE_APPEND);
                 return false;
             }
+
+            //insertar id_usuario a tabla conteo_baneo_usuarios
+            $stmt = $this->conn->prepare("INSERT INTO ola_ke_hace.conteo_baneo_usuarios (id_usuario) VALUES (?)");
+            $stmt->bind_param("i", $idUsuario);
+            $stmt->execute();            
 
             $mensaje = "Has sido baneado por publicaciones repetidamente reportadas.";
             $tipo = "Baneo";

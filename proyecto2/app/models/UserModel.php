@@ -182,6 +182,59 @@ class UserModel
     }
 
 
+    public function obtener3UsuariosMasBaneados()
+    {
+        $users = [];
+
+        // SQL Query
+        $sql = "
+        SELECT 
+        u.id_usuario,
+        u.nombre, 
+        u.username, 
+        u.correo, 
+        cbu.id_usuario, 
+        COUNT(cbu.id_usuario) AS conteo
+    FROM 
+        conteo_baneo_usuarios cbu
+    JOIN 
+        ola_ke_hace.usuario u 
+    ON 
+        cbu.id_usuario = u.id_usuario
+    GROUP BY 
+        cbu.id_usuario
+    ORDER BY 
+        conteo DESC
+    LIMIT 3;
+
+        ";
+
+        try {
+            // Preparar la consulta
+            if (!$stmt = $this->conn->prepare($sql)) {
+                throw new Exception("Error preparando la consulta: " . $this->conn->error);
+            }
+
+            // Ejecutar
+            $stmt->execute();
+
+            // Obtener resultados
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                $users[] = $row;
+            }
+
+            // Cerrar la declaración
+            $stmt->close();
+        } catch (Exception $e) {
+            error_log($e->getMessage()); // Registrar error en logs
+            return ["error" => "Error al ejecutar la consulta"]; // Respuesta controlada
+        }
+
+        return $users;
+    }
+
+
 
 
     public function __destruct()
