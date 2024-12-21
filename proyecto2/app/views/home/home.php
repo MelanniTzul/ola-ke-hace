@@ -137,19 +137,6 @@ $categorias = $categoriaController->mostrarCategoria();
                 });
         }
 
-        function marcarNotificacionesLeidas() {
-            fetch('/app/controllers/notificationController.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    action: 'marcarComoLeidas',
-                    userId: <?php echo $_SESSION['id']; ?>
-                })
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             const eventosModal = document.getElementById('eventosModal');
 

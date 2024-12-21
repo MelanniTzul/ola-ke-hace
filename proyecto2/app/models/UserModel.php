@@ -141,8 +141,7 @@ class UserModel
         JOIN 
             ola_ke_hace.reporte_publicacion ON reporte_publicacion.id_publicacion = publicacion.id_publicacion
         WHERE 
-            usuario.estado IN (0, 1) 
-            AND usuario.id_rol = 2
+            usuario.id_rol = 2
         GROUP BY 
             usuario.id_usuario, 
             usuario.nombre, 
@@ -182,7 +181,7 @@ class UserModel
     }
 
 
-    public function obtener3UsuariosMasBaneados()
+    public function obtenerUsuariosBaneados()
     {
         $users = [];
 

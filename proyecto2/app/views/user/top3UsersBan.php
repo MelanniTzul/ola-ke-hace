@@ -59,7 +59,7 @@
                     <?php
                     require_once __DIR__ . '/../../controllers/userController.php';
                     $userController = new UserController();
-                    $users = $userController->obtener3UsuariosMasBaneados();
+                    $users = $userController->obtenerUsuariosBaneados();
                     ?>
 
                     <div class="container mt-4">
