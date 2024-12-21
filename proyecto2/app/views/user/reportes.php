@@ -19,7 +19,7 @@
                         <a class="nav-link" href="aprobacionPublicaciones.php">Aprobar Publicaciones Pendientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="reportes.php">Reportes Baneo</a>
+                        <a class="nav-link" href="reportes.php">Aprobación de reportes de publicaciones</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../categorias/addCategoria.php">Agregar Categoría</a>
