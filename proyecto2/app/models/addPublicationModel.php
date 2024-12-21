@@ -303,9 +303,9 @@ class AddPublicationModel
     //     return $publicaciones;
     // }
     public function getPublicacionesSinAprobar(): array
-{
-    $publicaciones = [];
-    $sql = "SELECT 
+    {
+        $publicaciones = [];
+        $sql = "SELECT 
                 p.id_publicacion, 
                 p.nombre_publicacion, 
                 p.estado, 
@@ -328,16 +328,16 @@ class AddPublicationModel
                 p.id_usuario = u.id_usuario
             WHERE 
                 p.aprobado = 0 AND p.estado = 1";
-                
-    $result = $this->conn->query($sql);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $publicaciones[] = $row;
+
+        $result = $this->conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $publicaciones[] = $row;
+            }
         }
+        $this->conn->close();
+        return $publicaciones;
     }
-    $this->conn->close();
-    return $publicaciones;
-}
 
 
     public function getPublicacionesReportadas(): array
@@ -549,9 +549,9 @@ class AddPublicationModel
             }
 
             //insertar id_usuario a tabla conteo_baneo_usuarios
-            $stmt = $this->conn->prepare("INSERT INTO ola_ke_hace.conteo_baneo_usuarios (id_usuario) VALUES (?)");
+            $stmt = $this->conn->prepare("INSERT INTO ola_ke_hace.conteo_baneo_usuarios (id_usuario, fecha) VALUES (?, NOW())");
             $stmt->bind_param("i", $idUsuario);
-            $stmt->execute();            
+            $stmt->execute();
 
             $mensaje = "Has sido baneado por publicaciones repetidamente reportadas.";
             $tipo = "Baneo";
@@ -567,74 +567,132 @@ class AddPublicationModel
         }
     }
 
-    public function contar3PublicacionesReportadas()
+    public function contar3PublicacionesReportadas($filters = [])
     {
         $posts = [];
-
         $sql = "
-        SELECT 
-            publicacion.id_publicacion, 
-            publicacion.nombre_publicacion, 
-            publicacion.estado, 
-            publicacion.descripcion, 
-            publicacion.fecha, 
-            categoria_publicacion.nombre_categoria AS categoria, 
-            publicacion.ubicacion, 
-            publicacion.hora, 
-            publicacion.limite_personas, 
-            publicacion.imagen, 
-            usuario.username,
-            publicacion.limite_personas_actual,
-            COUNT(reporte_publicacion.id_reporte_publicacion) AS cantidad_reportes
-        FROM 
-            ola_ke_hace.publicacion
-         JOIN 
-            ola_ke_hace.usuario 
-            ON publicacion.id_usuario = usuario.id_usuario
-         JOIN 
-            ola_ke_hace.reporte_publicacion 
-            ON reporte_publicacion.id_publicacion = publicacion.id_publicacion
-         JOIN
-            ola_ke_hace.categoria_publicacion
-            ON publicacion.id_categoria = categoria_publicacion.id
-        GROUP BY 
-            publicacion.id_publicacion, 
-            publicacion.nombre_publicacion, 
-            publicacion.estado, 
-            publicacion.descripcion, 
-            publicacion.fecha, 
-            publicacion.id_categoria, 
-            publicacion.ubicacion, 
-            publicacion.hora, 
-            publicacion.limite_personas, 
-            publicacion.imagen, 
-            usuario.nombre, 
-            publicacion.limite_personas_actual
-        ORDER BY 
-            cantidad_reportes DESC
-        LIMIT 3;
+    SELECT 
+        publicacion.id_publicacion, 
+        publicacion.nombre_publicacion, 
+        CASE 
+            WHEN reporte_publicacion.estado = 0 THEN 'Reporte Sin Aprobar Por Administrador'
+            WHEN reporte_publicacion.estado = 1 THEN 'Reporte Aprobado'
+            WHEN reporte_publicacion.estado = 2 THEN 'Reporte Rechazado'
+            ELSE 'Desconocido'
+        END AS estado, 
+        publicacion.descripcion, 
+        DATE_FORMAT(publicacion.fecha, '%d/%m/%Y') AS fecha,
+        categoria_publicacion.nombre_categoria AS categoria, 
+        publicacion.ubicacion, 
+        publicacion.hora, 
+        publicacion.limite_personas, 
+        publicacion.imagen, 
+        usuario.username,
+        publicacion.limite_personas_actual,
+        COUNT(reporte_publicacion.id_reporte_publicacion) AS cantidad_reportes
+    FROM 
+        ola_ke_hace.publicacion
+     JOIN 
+        ola_ke_hace.usuario 
+        ON publicacion.id_usuario = usuario.id_usuario
+     JOIN 
+        ola_ke_hace.reporte_publicacion 
+        ON reporte_publicacion.id_publicacion = publicacion.id_publicacion
+     JOIN
+        ola_ke_hace.categoria_publicacion
+        ON publicacion.id_categoria = categoria_publicacion.id
+    WHERE 1=1
     ";
 
+        $params = [];
+        $types = "";
+
+        // Filtros
+        if (!empty($filters['nombre'])) {
+            $sql .= " AND publicacion.nombre_publicacion LIKE ?";
+            $params[] = "%" . $filters['nombre'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['username'])) {
+            $sql .= " AND usuario.username LIKE ?";
+            $params[] = "%" . $filters['username'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['ubicacion'])) {
+            $sql .= " AND publicacion.ubicacion LIKE ?";
+            $params[] = "%" . $filters['ubicacion'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['categoria'])) {
+            $sql .= " AND categoria_publicacion.id = ?";
+            $params[] = $filters['categoria'];
+            $types .= "i";
+        }
+
+        if (!empty($filters['fecha_inicio'])) {
+            $sql .= " AND publicacion.fecha >= ?";
+            $params[] = $filters['fecha_inicio'];
+            $types .= "s";
+        }
+
+        if (!empty($filters['fecha_fin'])) {
+            $sql .= " AND publicacion.fecha <= ?";
+            $params[] = $filters['fecha_fin'];
+            $types .= "s";
+        }
+
+        if (!empty($filters['estado_reporte'])) {
+            $sql .= " AND reporte_publicacion.estado = ?";
+            if ($filters['estado_reporte'] == 3) {
+                $filters['estado_reporte'] = 0;
+            }
+            $params[] = $filters['estado_reporte'];
+            $types .= "s";
+        }
+
+        $sql .= "
+    GROUP BY 
+        publicacion.id_publicacion, 
+        publicacion.nombre_publicacion, 
+        reporte_publicacion.estado,
+        publicacion.estado,
+        publicacion.descripcion, 
+        publicacion.fecha, 
+        publicacion.id_categoria, 
+        publicacion.ubicacion, 
+        publicacion.hora, 
+        publicacion.limite_personas, 
+        publicacion.imagen, 
+        usuario.username, 
+        publicacion.limite_personas_actual
+    ORDER BY 
+        cantidad_reportes DESC
+    LIMIT 3;";
+
         try {
-            // Preparar la consulta
             if (!$stmt = $this->conn->prepare($sql)) {
                 throw new Exception("Error preparando la consulta: " . $this->conn->error);
             }
 
-            // Ejecutar
+            if (count($params) > 0) {
+                $stmt->bind_param($types, ...$params);
+            }
+
             $stmt->execute();
 
-            // Obtener resultados
             $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()) {
                 $posts[] = $row;
             }
 
-            // Cerrar la declaración
+            $result->free();
             $stmt->close();
         } catch (Exception $e) {
-            error_log($e->getMessage()); // Registrar error en logs
-            return ["error" => "Error al ejecutar la consulta"];
+            error_log($e->getMessage());
+            return ["error" => $e->getMessage()];
         }
 
         return $posts;

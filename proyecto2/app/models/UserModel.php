@@ -111,7 +111,7 @@ class UserModel
         return true;
     }
 
-    public function getUsersReport()
+    public function getUsersReport($filters = [])
     {
         $users = [];
 
@@ -142,6 +142,45 @@ class UserModel
             ola_ke_hace.reporte_publicacion ON reporte_publicacion.id_publicacion = publicacion.id_publicacion
         WHERE 
             usuario.id_rol = 2
+    ";
+
+        $params = [];
+        $types = "";
+
+        if (!empty($filters['nombre'])) {
+            $sql .= " AND usuario.nombre LIKE ?";
+            $params[] = "%" . $filters['nombre'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['username'])) {
+            $sql .= " AND usuario.username LIKE ?";
+            $params[] = "%" . $filters['username'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['correo'])) {
+            $sql .= " AND usuario.correo LIKE ?";
+            $params[] = "%" . $filters['correo'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['pais'])) {
+            $sql .= " AND usuario.id_pais = ?";
+            $params[] = $filters['pais'];
+            $types .= "i";
+        }
+
+        if (!empty($filters['estado'])) {
+            $sql .= " AND usuario.estado = ?";
+            if ($filters['estado'] == 3) {
+                $filters['estado'] = 0;
+            }
+            $params[] = $filters['estado'];
+            $types .= "i";
+        }
+
+        $sql .= "
         GROUP BY 
             usuario.id_usuario, 
             usuario.nombre, 
@@ -152,13 +191,17 @@ class UserModel
             usuario.estado
         ORDER BY 
             cantidad_reportes DESC
-        LIMIT 3;
-    ";
+        LIMIT 3;";
+
 
         try {
             // Preparar la consulta
             if (!$stmt = $this->conn->prepare($sql)) {
                 throw new Exception("Error preparando la consulta: " . $this->conn->error);
+            }
+
+            if (count($params) > 0) {
+                $stmt->bind_param($types, ...$params);
             }
 
             // Ejecutar
@@ -171,6 +214,7 @@ class UserModel
             }
 
             // Cerrar la declaración
+            $result->free();
             $stmt->close();
         } catch (Exception $e) {
             error_log($e->getMessage()); // Registrar error en logs
@@ -181,7 +225,7 @@ class UserModel
     }
 
 
-    public function obtenerUsuariosBaneados()
+    public function obtenerUsuariosBaneados($filters = [])
     {
         $users = [];
 
@@ -193,24 +237,64 @@ class UserModel
         u.username, 
         u.correo, 
         cbu.id_usuario, 
-        COUNT(cbu.id_usuario) AS conteo
+        COUNT(cbu.id_usuario) AS conteo,
+        date_format(cbu.fecha, '%d/%m/%Y') AS fecha
     FROM 
         conteo_baneo_usuarios cbu
     JOIN 
         ola_ke_hace.usuario u 
     ON 
         cbu.id_usuario = u.id_usuario
-    GROUP BY 
-        cbu.id_usuario
-    ORDER BY 
-        conteo DESC;
+    WHERE 1=1
 
-        ";
+    ";
+
+        $params = [];
+        $types = "";
+
+        if (!empty($filters['nombre'])) {
+            $sql .= " AND u.nombre LIKE ?";
+            $params[] = "%" . $filters['nombre'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['username'])) {
+            $sql .= " AND u.username LIKE ?";
+            $params[] = "%" . $filters['username'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['correo'])) {
+            $sql .= " AND u.correo LIKE ?";
+            $params[] = "%" . $filters['correo'] . "%";
+            $types .= "s";
+        }
+
+        if (!empty($filters['fecha_ban'])) {
+            $sql .= " AND cbu.fecha_ban = ?";
+            $params[] = $filters['fecha_ban'];
+            $types .= "s";
+        }
+
+        $sql .= " 
+    GROUP BY 
+        cbu.id_usuario, 
+        u.id_usuario, 
+        u.nombre, 
+        u.username, 
+        u.correo,
+        cbu.fecha
+    ORDER BY cbu.fecha DESC";
+
 
         try {
             // Preparar la consulta
             if (!$stmt = $this->conn->prepare($sql)) {
                 throw new Exception("Error preparando la consulta: " . $this->conn->error);
+            }
+
+            if (!empty($params)) {
+                $stmt->bind_param($types, ...$params);
             }
 
             // Ejecutar

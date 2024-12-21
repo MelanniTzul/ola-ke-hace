@@ -58,12 +58,77 @@
                     <!-- <main role="main" class=""> -->
                     <?php
                     require_once __DIR__ . '/../../controllers/userController.php';
+                    require_once __DIR__ . '/../../controllers/paisController.php';
                     $userController = new UserController();
-                    $users = $userController->getUsersReport();
+                    $filters = [
+                        'nombre' => $_GET['nombre'] ?? '',
+                        'username' => $_GET['username'] ?? '',
+                        'correo' => $_GET['correo'] ?? '',
+                        'pais' => $_GET['pais'] ?? '',
+                        'estado' => $_GET['estado'] ?? ''
+                    ];
+                    $users = $userController->getUsersReport($filters);
+                    $paisController = new PaisController();
+                    $paises = $paisController->mostrarPaises();
                     ?>
 
                     <div class="container mt-4">
                         <h2 class="text-center mb-4">Top 3 Usuarios Más Reportados</h2>
+
+                        <form method="GET" action="" class="mb-3">
+
+                            <div class="row">
+                                <!-- Búsqueda por nombre -->
+                                <div class="col-md-4">
+                                    <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="<?php echo htmlspecialchars($_GET['nombre'] ?? ''); ?>">
+                                </div>
+
+                                <!-- Búsqueda por username -->
+                                <div class="col-md-4">
+                                    <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo htmlspecialchars($_GET['username'] ?? ''); ?>">
+                                </div>
+
+                                <!-- Búsqueda por correo -->
+                                <div class="col-md-4">
+                                    <input type="text" name="correo" class="form-control" placeholder="Correo" value="<?php echo htmlspecialchars($_GET['correo'] ?? ''); ?>">
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <br>
+                                    <select name="pais" class="form-control">
+                                        <option value="">País</option>
+                                        <?php foreach ($paises as $pais) : ?>
+                                            <option value="<?php echo $pais['id_pais']; ?>" <?php echo ($_GET['pais'] ?? '') == $pais['id_pais'] ? 'selected' : ''; ?>>
+                                                <?php echo $pais['nombre']; ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+
+
+
+                                <div class="col-md-4">
+                                    <br>
+                                    <select name="estado" class="form-control">
+                                        <option value="">Estado</option>
+                                        <option value="Activo" <?php echo ($_GET['estado'] ?? '') === 'Activo' ? 'selected' : ''; ?>>Activo</option>
+                                        <option value="Baneado" <?php echo ($_GET['estado'] ?? '') === 'Baneado' ? 'selected' : ''; ?>>Baneado</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-4">
+                                    <br>
+                                    <button type="submit" class="btn btn-primary btn-block">Buscar</button>
+                                </div>
+
+
+
+                            </div>
+
+                        </form>
+
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered">
                                 <thead class="table-dark">

@@ -59,11 +59,55 @@
                     <?php
                     require_once __DIR__ . '/../../controllers/userController.php';
                     $userController = new UserController();
-                    $users = $userController->obtenerUsuariosBaneados();
+
+                    $filters = [
+                        'nombre' => $_GET['nombre'] ?? null,
+                        'username' => $_GET['username'] ?? null,
+                        'correo' => $_GET['correo'] ?? null,
+                        'fecha_ban' => $_GET['fecha_ban'] ?? null,
+                    ];
+
+                    $users = $userController->obtenerUsuariosBaneados($filters);
                     ?>
+
 
                     <div class="container mt-4">
                         <h2 class="text-center mb-4">Usuarios Baneados</h2>
+
+
+                        <form method="GET" action="" class="mb-3">
+                            <div class="row">
+                                <!-- Búsqueda por nombre -->
+                                <div class="col-md-4">
+                                    <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="<?php echo htmlspecialchars($_GET['nombre'] ?? ''); ?>">
+                                </div>
+
+                                <!-- Búsqueda por username -->
+                                <div class="col-md-4">
+                                    <input type="text" name="username" class="form-control" placeholder="Username" value="<?php echo htmlspecialchars($_GET['username'] ?? ''); ?>">
+                                </div>
+
+                                <!-- Búsqueda por correo -->
+                                <div class="col-md-4">
+                                    <input type="text" name="correo" class="form-control" placeholder="Correo" value="<?php echo htmlspecialchars($_GET['correo'] ?? ''); ?>">
+                                </div>
+
+                                <!--Búsqueda por fecha de ban -->
+                                <div class="col-md-4">
+                                    <br>
+                                    <input type="date" name="fecha_ban" class="form-control" value="<?php echo htmlspecialchars($_GET['fecha_ban'] ?? ''); ?>">
+                                </div>
+
+
+
+                                <!-- Botón de buscar -->
+                                <div class="col-md-4">
+                                    <br>
+                                    <button type="submit" class="btn btn-primary btn-block">Buscar</button>
+                                </div>
+                            </div>
+                        </form>
+
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered">
                                 <thead class="table-dark">
@@ -72,7 +116,8 @@
                                         <th>Nombre</th>
                                         <th>Username</th>
                                         <th>Correo</th>
-                                        <th>Cantidad de reportes</th>
+                                        <th>Fecha de baneo</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,7 +127,7 @@
                                             <td><?php echo htmlspecialchars($user['nombre']); ?></td>
                                             <td><?php echo htmlspecialchars($user['username']); ?></td>
                                             <td><?php echo htmlspecialchars($user['correo']); ?></td>
-                                             <td><?php echo htmlspecialchars($user['conteo']); ?></td>
+                                            <td><?php echo htmlspecialchars($user['fecha']); ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -93,5 +138,5 @@
             </div>
 
         </div>
-    </div>
+    </div>
 </div>

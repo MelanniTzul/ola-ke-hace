@@ -23,12 +23,12 @@ class PublicationController
         return $this->addPublicationModel->getPublicacionesReportadas();
     }
 
-    public function contar3PublicacionesReportadas()
+    public function contar3PublicacionesReportadas($filters = [])
     {
-        return $this->addPublicationModel->contar3PublicacionesReportadas();
+        return $this->addPublicationModel->contar3PublicacionesReportadas($filters);
     }
 
-    public function addPublication($data)
+   public function addPublication($data)
     {
         try {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

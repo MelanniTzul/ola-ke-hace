@@ -19,13 +19,13 @@ class UserController
         include __DIR__ . '/../views/user/userView.php';
     }
 
-    public function getUsersReport()
+    public function getUsersReport($filters = [])
     {
-        return $this->userModel->getUsersReport();
+        return $this->userModel->getUsersReport($filters);
     }
 
-    public function obtenerUsuariosBaneados(){
-        return $this->userModel->obtenerUsuariosBaneados();
+    public function obtenerUsuariosBaneados($filters = []){
+        return $this->userModel->obtenerUsuariosBaneados($filters);
     }
     
 
